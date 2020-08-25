@@ -4,7 +4,7 @@ const remainingDuration = document.querySelector('#remaining-duration');
 const remainingHrs = remainingDuration.querySelector('#hrs');
 const remainingMins = remainingDuration.querySelector('#mins');
 const remainingSecs = remainingDuration.querySelector('#secs');
-const circle = document.querySelector('circle');
+const circle = document.querySelector('#circle');
 
 const perimeter = circle.getAttribute('r') * Math.PI * 2;
 circle.setAttribute('stroke-dasharray', perimeter);
