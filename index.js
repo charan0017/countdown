@@ -18,11 +18,13 @@ const timer = new Timer(durationInput, {
   },
   onTick(timeRemaining, totalDuration, percentRemaining) {
     circle.setAttribute('stroke-dashoffset', (perimeter * timeRemaining) / totalDuration - perimeter);
-    remainingPercentText.innerHTML = `${percentRemaining.toFixed(2)} %`;
+    const percentageText = `${percentRemaining.toFixed(2)} %`;
+    remainingPercentText.innerHTML = percentageText;
     const remainingInterval = getIntervalFromSeconds(durationInput.value);
     remainingHrs.innerHTML = remainingInterval.hrs;
     remainingMins.innerHTML = remainingInterval.mins;
     remainingSecs.innerHTML = remainingInterval.secs;
+    document.title = `${percentageText} - ${remainingInterval.hrs}.${remainingInterval.mins}.${remainingInterval.secs}`;
   },
   onComplete() {
     console.log('complete');
