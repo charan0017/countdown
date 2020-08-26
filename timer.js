@@ -1,6 +1,6 @@
 class Timer {
-  constructor(durationInput, callbacks) {
-    this.durationInput = durationInput;
+  constructor(timeRemaining, callbacks) {
+    this.timeRemaining = timeRemaining;
     this.totalDuration = getIntervalSeconds({ hrs: 24 - 7 });
     this.remainigPercentage = 100;
     this.started = false;
@@ -36,12 +36,4 @@ class Timer {
     this.remainigPercentage = (this.timeRemaining / this.totalDuration) * 100;
     if (this.onTick) this.onTick(this.timeRemaining, this.totalDuration, this.remainigPercentage);
   };
-
-  get timeRemaining() {
-    return parseFloat(this.durationInput.value);
-  }
-
-  set timeRemaining(time) {
-    this.durationInput.value = time.toFixed(2);
-  }
 }
