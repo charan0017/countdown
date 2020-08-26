@@ -18,7 +18,7 @@ class Timer {
   };
 
   start = () => {
-    this.interval = setInterval(this.tick, 20);
+    this.interval = setInterval(this.tick, 1000);
     if (this.onStart) this.onStart(this.timeRemaining);
   };
 
@@ -32,7 +32,7 @@ class Timer {
       if (this.onComplete) this.onComplete();
       return;
     }
-    this.timeRemaining -= 0.02;
+    this.timeRemaining -= 1;
     this.remainigPercentage = (this.timeRemaining / this.totalDuration) * 100;
     if (this.onTick) this.onTick(this.timeRemaining, this.totalDuration, this.remainigPercentage);
   };
