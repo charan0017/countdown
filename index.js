@@ -1,3 +1,5 @@
+const timerDiv = document.querySelector('#root');
+const sleepDiv = document.querySelector('#sleep');
 const remainingPercentP = document.querySelector('#remaining-percent');
 const remainingDuration = document.querySelector('#remaining-duration');
 const remainingHrsP = remainingDuration.querySelector('#hrs');
@@ -27,6 +29,8 @@ function createNewTimer() {
     },
     onComplete() {
       console.log('complete');
+      timerDiv.classList.add('d-none');
+      sleepDiv.classList.remove('d-none');
     },
   });
 }

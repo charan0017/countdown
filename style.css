@@ -12,9 +12,11 @@
   font: inherit;
 }
 
+html,
 body {
   font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica,
     Arial, sans-serif;
+  height: 100%;
 }
 
 #root {
