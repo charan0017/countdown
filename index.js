@@ -16,6 +16,7 @@ function createNewTimer() {
   timer = new Timer(getRemainingTime(), {
     onStart(totalDuration) {
       console.log(`A new coutdown has started, totalSeconds: ${totalDuration}`);
+      rootDiv.classList.remove('d-none');
     },
     onTick(timeRemaining, totalDuration, percentRemaining) {
       circle.setAttribute('stroke-dashoffset', (perimeter * timeRemaining) / totalDuration - perimeter);
@@ -25,12 +26,14 @@ function createNewTimer() {
       remainingHrsP.innerHTML = remainingInterval.hrs;
       remainingMinsP.innerHTML = remainingInterval.mins;
       remainingSecsP.innerHTML = remainingInterval.secs;
-      document.title = `${percentageText} - ${remainingInterval.hrs}.${remainingInterval.mins}.${remainingInterval.secs}`;
+      document.title = `${remainingInterval.hrs}.${remainingInterval.mins}.${remainingInterval.secs} - ${percentageText}`;
     },
     onComplete() {
       console.log('complete');
       rootDiv.classList.add('d-none');
       sleepDiv.classList.remove('d-none');
+      sleepDiv.classList.add('h-100');
+      sleepDiv.classList.add('d-flex');
     },
   });
 }

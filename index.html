@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=1366, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Countdown</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap@4.5.2.min.css" />
+    <link rel="stylesheet" href="css/font-awesome@5.11.2.all.min.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body class="body">
-    <div id="root" class="container mt-5 h-100 justify-content-center">
+    <div id="root" class="container pt-5 h-100 justify-content-center d-none">
       <div class="row justify-content-center align-items-center">
         <div id="timer" class="timer">
           <div class="controls">
@@ -39,7 +35,6 @@
       <div class="m-4 text-center">
         <span class="badge badge-info text-capitalize">remainig time</span>
         <div id="remaining-duration" class="row justify-content-center align-items-center">
-          <!-- <div class="col-3"><p>Remianing Time:</p></div> -->
           <div class="col-8 border border-info rounded">
             <div class="row justify-content-center align-items-center text-center pt-3 pb-3">
               <div class="col-4 border-right">
@@ -59,19 +54,16 @@
         </div>
       </div>
     </div>
-    <div id="sleep" class="container h-100 d-flex justify-content-center d-none">
+    <div id="sleep" class="container justify-content-center d-none">
       <div class="my-auto text-center">
         <h2>Its sleeptime 😴</h2>
         <h2>Go back to bed before its too late!!</h2>
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="scripts/jquery@3.5.1.slim.min.js"></script>
+    <script src="scripts/popper@1.16.1.min.js"></script>
+    <script src="scripts/bootstrap@4.5.2.min.js"></script>
     <script src="utils.js"></script>
     <script src="timer.js"></script>
     <script src="index.js"></script>
