@@ -1,7 +1,7 @@
 class Timer {
   constructor(timeRemaining, callbacks) {
     this.timeRemaining = timeRemaining;
-    this.totalDuration = getIntervalSeconds({ hrs: 24 - 7 });
+    this.totalDuration = getIntervalSeconds({ hrs: 24 - 6 });
     this.remainigPercentage = 100;
     this.started = false;
     if (callbacks) {
