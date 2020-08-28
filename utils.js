@@ -1,3 +1,5 @@
+const pad = (str) => `00${str}`.slice(-2);
+
 function getCurrentInterval() {
   const currentTime = new Date();
   const currentOffset = currentTime.getTimezoneOffset();
@@ -13,9 +15,9 @@ function getIntervalSeconds(interval, inMs) {
 }
 
 function getIntervalFromSeconds(seconds) {
-  const hrs = Math.floor(seconds / 60 / 60);
-  const mins = Math.floor((seconds - hrs * 60 * 60) / 60);
-  const secs = Math.floor(seconds - hrs * 60 * 60 - mins * 60);
+  const hrs = pad(Math.floor(seconds / 60 / 60));
+  const mins = pad(Math.floor((seconds - hrs * 60 * 60) / 60));
+  const secs = pad(Math.floor(seconds - hrs * 60 * 60 - mins * 60));
   return { days: 0, hrs, mins, secs };
 }
 
