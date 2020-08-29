@@ -25,3 +25,8 @@ function getRemainingTime(inMs) {
   const remainingTime = Math.round(getIntervalSeconds(getCurrentInterval(), inMs));
   return remainingTime < 0 ? 0 : remainingTime;
 }
+
+function updateClassList(el, nightModeEnabled, className) {
+  if (!el) return;
+  el.classList[nightModeEnabled ? 'add' : 'remove'](className);
+}
