@@ -29,6 +29,7 @@ function nightMode(enabled = false) {
   circle.setAttribute('fill', enabled ? '#243447' : '#f3f3f3');
   circleEdge.setAttribute('fill', enabled ? '#d3d3d3' : 'grey');
   updateClassList(nightModeDiv, enabled, 'nightmode-text');
+  updateClassList(sleepDiv, enabled, 'nightmode-text');
 }
 
 function checkNighModeEnabled() {
