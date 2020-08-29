@@ -65,3 +65,11 @@ body {
   left: 3px;
   top: 0;
 }
+
+.nightmode-background {
+  background-color: #2f4f4f;
+}
+
+.nightmode-text {
+  color: #f3f3f3;
+}

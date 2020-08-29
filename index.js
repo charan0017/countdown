@@ -1,11 +1,12 @@
 const rootDiv = document.querySelector('#root');
-const sleepDiv = document.querySelector('#sleep');
-const remainingPercentP = document.querySelector('#remaining-percent');
-const remainingDuration = document.querySelector('#remaining-duration');
+const countdownDiv = rootDiv.querySelector('#countdown');
+const sleepDiv = rootDiv.querySelector('#sleep');
+const remainingPercentP = rootDiv.querySelector('#remaining-percent');
+const remainingDuration = rootDiv.querySelector('#remaining-duration');
 const remainingHrsP = remainingDuration.querySelector('#hrs');
 const remainingMinsP = remainingDuration.querySelector('#mins');
 const remainingSecsP = remainingDuration.querySelector('#secs');
-const circle = document.querySelector('#circle');
+const circle = rootDiv.querySelector('#circle');
 
 const perimeter = circle.getAttribute('r') * Math.PI * 2;
 circle.setAttribute('stroke-dasharray', perimeter);
@@ -16,7 +17,7 @@ function createNewTimer() {
   timer = new Timer(getRemainingTime(), {
     onStart(totalDuration) {
       console.log(`A new coutdown has started, totalSeconds: ${totalDuration}`);
-      rootDiv.classList.remove('d-none');
+      countdownDiv.classList.remove('d-none');
     },
     onTick(timeRemaining, totalDuration, percentRemaining) {
       circle.setAttribute('stroke-dashoffset', (perimeter * timeRemaining) / totalDuration - perimeter);
@@ -30,7 +31,7 @@ function createNewTimer() {
     },
     onComplete() {
       console.log('complete');
-      rootDiv.classList.add('d-none');
+      countdownDiv.classList.add('d-none');
       sleepDiv.classList.remove('d-none');
       sleepDiv.classList.add('h-100');
       sleepDiv.classList.add('d-flex');
