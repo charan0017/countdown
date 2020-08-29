@@ -35,6 +35,7 @@ function createNewTimer() {
       sleepDiv.classList.remove('d-none');
       sleepDiv.classList.add('h-100');
       sleepDiv.classList.add('d-flex');
+      document.title = 'Sleeptime!! 💤';
     },
   });
 }
