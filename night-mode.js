@@ -28,6 +28,7 @@ function checkNighModeEnabled() {
   const nightModeEnabled = window.localStorage.getItem(NightModeEnabled);
   if (!nightModeEnabled) return;
   nightMode(true);
+  nightModeCheckbox.checked = true;
 }
 
 checkNighModeEnabled();
