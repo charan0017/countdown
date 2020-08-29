@@ -1,6 +1,12 @@
 const nightModeDiv = rootDiv.querySelector('#nightModeDiv');
 const nightModeCheckbox = nightModeDiv.querySelector('#nightMode');
 const circleEdge = rootDiv.querySelector('#circle-edge');
+const badge = rootDiv.querySelector('.badge');
+const borders = [
+  rootDiv.querySelector('#remaining-duration .border'),
+  ...Array.from(rootDiv.querySelectorAll('#remaining-duration .border-right')),
+];
+
 const NightModeEnabled = 'NightModeEnabled';
 
 nightModeCheckbox.addEventListener('change', function () {
@@ -19,6 +25,12 @@ function nightMode(enable = false) {
   rootDiv.classList[enable ? 'add' : 'remove']('nightmode-background');
   remainingPercentP.classList[enable ? 'add' : 'remove']('nightmode-text');
   remainingDuration.classList[enable ? 'add' : 'remove']('nightmode-text');
+  badge.classList[enable ? 'remove' : 'add']('badge-dark');
+  badge.classList[enable ? 'add' : 'remove']('badge-light');
+  borders.forEach((bordr) => {
+    bordr.classList[enable ? 'remove' : 'add']('border-dark');
+    bordr.classList[enable ? 'add' : 'remove']('border-light');
+  });
   circle.setAttribute('fill', enable ? '#224141' : '#f3f3f3');
   circleEdge.setAttribute('fill', enable ? '#d3d3d3' : 'grey');
   nightModeDiv.classList[enable ? 'add' : 'remove']('nightmode-text');
