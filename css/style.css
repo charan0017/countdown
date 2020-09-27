@@ -75,7 +75,7 @@ body {
   }
   100% {
     opacity: 0;
-    transform: translate(0px, -40px);
+    transform: translate(0px, -80px);
   }
 }
 @keyframes slide-up-fade-in {
