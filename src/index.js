@@ -83,7 +83,11 @@ addTaskInput.addEventListener('keyup', (e) => {
 (async () => {
   const imageUrl = await getBingWallpaperUrl();
   root.style.backgroundImage = `url('${imageUrl}')`;
-  loadTasks().forEach((task) => appendTask(task));
+  loadTasks().forEach((task, i) => {
+    setTimeout(() => {
+      appendTask(task);
+    }, (i + 1) * 150);
+  });
   countUnDoneTasks();
   loadingDiv.classList.add('d-none');
   if (!sleepDiv.classList.contains('d-none')) return;
