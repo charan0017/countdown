@@ -108,5 +108,5 @@ function loadTasks() {
     saveTasks([]);
     return [];
   }
-  return JSON.parse(tasksData).map((t) => Task.fromJson(t));
+  return tasksData.map((t) => Task.fromJson(t));
 }
