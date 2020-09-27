@@ -64,7 +64,7 @@ function appendTask(task) {
   saveTasks(tasks);
 }
 
-addTaskBtn.addEventListener('click', () => {
+function addTaskFunc() {
   const taskTitle = addTaskInput.value;
   if (!taskTitle) return;
   const task = new Task(taskTitle.trim(), '');
@@ -72,6 +72,12 @@ addTaskBtn.addEventListener('click', () => {
   appendTask(task);
   unDoneTasksCount += 1;
   addTaskInput.select();
+}
+
+addTaskBtn.addEventListener('click', addTaskFunc);
+addTaskInput.addEventListener('keyup', (e) => {
+  if (e.key !== 'Enter') return;
+  addTaskFunc();
 });
 
 (async () => {
