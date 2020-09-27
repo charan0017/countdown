@@ -44,13 +44,15 @@ function getTodaysDateStr() {
   return new Date().toISOString().split('T')[0];
 }
 
-function storeItem(name, data) {
+function storeItem(name, data, includeDate = true) {
   localStorage.setItem(
     name,
-    JSON.stringify({
-      date: getTodaysDateStr(),
-      ...data,
-    })
+    includeDate
+      ? JSON.stringify({
+          date: getTodaysDateStr(),
+          ...data,
+        })
+      : data
   );
 }
 
@@ -97,14 +99,14 @@ function createTaskChild(task, taskChildOnClick) {
 }
 
 function saveTasks(tasks) {
-  localStorage.setItem('tasksData', JSON.stringify(tasks));
+  storeItem('tasksData', JSON.stringify(tasks), false);
 }
 
 function loadTasks() {
-  const tasksData = localStorage.getItem('tasksData');
-  if (tasksData && Array.isArray(tasksData)) {
-    return tasksData.map((t) => Task.fromJson(t));
+  const tasksData = fetchItem('tasksData');
+  if (!Array.isArray(tasksData)) {
+    saveTasks([]);
+    return [];
   }
-  saveTasks([]);
-  return [];
+  return JSON.parse(tasksData).map((t) => Task.fromJson(t));
 }
