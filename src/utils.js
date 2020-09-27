@@ -26,9 +26,9 @@ function getRemainingTime(inMs) {
   return remainingTime < 0 ? 0 : remainingTime;
 }
 
-function updateClassList(el, nightModeEnabled, className) {
+function updateClassList(el, add, className) {
   if (!el) return;
-  el.classList[nightModeEnabled ? 'add' : 'remove'](className);
+  el.classList[add ? 'add' : 'remove'](className);
 }
 
 function parseImageUrl(str) {

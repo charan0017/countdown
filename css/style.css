@@ -111,3 +111,6 @@ body {
 .bg-w-lite {
   background-color: rgba(255, 255, 255, 0.7);
 }
+.bg-w-drk {
+  background-color: rgba(255, 255, 255, 0.2);
+}

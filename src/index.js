@@ -4,10 +4,10 @@ const sleepDiv = document.querySelector('#sleep');
 const countdownDiv = rootDiv.querySelector('#countdown');
 const countdownAllEls = countdownDiv.querySelectorAll('div.d-flex:not(#sleep)');
 const remainingPercentP = countdownDiv.querySelector('#remaining-percent');
-const remainingDuration = countdownDiv.querySelector('#remaining-duration');
-const remainingHrsP = remainingDuration.querySelector('#hrs');
-const remainingMinsP = remainingDuration.querySelector('#mins');
-const remainingSecsP = remainingDuration.querySelector('#secs');
+const remainingDurationDiv = countdownDiv.querySelector('#remaining-duration');
+const remainingHrsP = remainingDurationDiv.querySelector('#hrs');
+const remainingMinsP = remainingDurationDiv.querySelector('#mins');
+const remainingSecsP = remainingDurationDiv.querySelector('#secs');
 const circle = countdownDiv.querySelector('#circle');
 const taskList = document.querySelector('#task-list');
 const addTaskInput = document.querySelector('#add-task-input');
@@ -62,6 +62,7 @@ function appendTask(task) {
   const taskChild = createTaskChild(task, taskChildOnClick);
   taskList.appendChild(taskChild);
   saveTasks(tasks);
+  countUnDoneTasks();
 }
 
 function addTaskFunc() {
@@ -81,14 +82,11 @@ addTaskInput.addEventListener('keyup', (e) => {
 });
 
 (async () => {
-  const imageUrl = await getBingWallpaperUrl();
-  root.style.backgroundImage = `url('${imageUrl}')`;
   loadTasks().forEach((task, i) => {
     setTimeout(() => {
       appendTask(task);
     }, (i + 1) * 150);
   });
-  countUnDoneTasks();
   loadingDiv.classList.add('d-none');
   if (!sleepDiv.classList.contains('d-none')) return;
   rootDiv.classList.remove('d-none');
