@@ -97,13 +97,13 @@ function createTaskChild(task, taskChildOnClick) {
 }
 
 function saveTasks(tasks) {
-  storeItem('tasksData', { tasks });
+  localStorage.setItem('tasksData', JSON.stringify(tasks));
 }
 
 function loadTasks() {
-  const tasksData = fetchItem('tasksData');
-  if (tasksData && tasksData.date === getTodaysDateStr() && Array.isArray(tasksData.tasks)) {
-    return tasksData.tasks.map((t) => Task.fromJson(t));
+  const tasksData = localStorage.getItem('tasksData');
+  if (tasksData && Array.isArray(tasksData)) {
+    return tasksData.map((t) => Task.fromJson(t));
   }
   saveTasks([]);
   return [];
