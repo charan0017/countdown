@@ -5,7 +5,7 @@ const weatherText = weatherInfoDiv.querySelector('#weather-text');
 const dateText = weatherInfoDiv.querySelector('#date-text');
 
 const weatherAPI =
-  'http://dataservice.accuweather.com/currentconditions/v1/202190?apikey=yWUtuxJWjXxO7dL9cSTc0PTLoXDdYGYF';
+  'https://dataservice.accuweather.com/currentconditions/v1/202190?apikey=yWUtuxJWjXxO7dL9cSTc0PTLoXDdYGYF';
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 function getTodaysDateTxtStr() {
