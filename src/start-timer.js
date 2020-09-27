@@ -13,9 +13,9 @@ function createNewTimer() {
       remainingHrsP.innerHTML = remainingInterval.hrs;
       remainingMinsP.innerHTML = remainingInterval.mins;
       remainingSecsP.innerHTML = remainingInterval.secs;
-      document.title = `${tasks.length ? `(${tasks.length}) ` : ''}${remainingInterval.hrs}:${remainingInterval.mins}:${
-        remainingInterval.secs
-      } - ${percentageText}`;
+      document.title = `${unDoneTasksCount ? `(${unDoneTasksCount}) ` : ''}${remainingInterval.hrs}:${
+        remainingInterval.mins
+      }:${remainingInterval.secs} - ${percentageText}`;
     },
     onComplete() {
       console.log('complete');

@@ -17,6 +17,11 @@ const perimeter = circle.getAttribute('r') * Math.PI * 2;
 circle.setAttribute('stroke-dasharray', perimeter);
 
 const tasks = [];
+let unDoneTasksCount = 0;
+
+function countUnDoneTasks() {
+  unDoneTasksCount = tasks.filter((t) => t.done === false).length;
+}
 
 function taskChildOnClick(evt, taskId) {
   const taskIndex = tasks.findIndex((t) => t.getId() === taskId);
@@ -49,6 +54,7 @@ function taskChildOnClick(evt, taskId) {
       break;
   }
   saveTasks(tasks);
+  countUnDoneTasks();
 }
 
 function appendTask(task) {
@@ -64,6 +70,7 @@ addTaskBtn.addEventListener('click', () => {
   const task = new Task(taskTitle.trim(), '');
   addTaskInput.value = '';
   appendTask(task);
+  unDoneTasksCount += 1;
   addTaskInput.select();
 });
 
@@ -71,6 +78,7 @@ addTaskBtn.addEventListener('click', () => {
   const imageUrl = await getBingWallpaperUrl();
   root.style.backgroundImage = `url('${imageUrl}')`;
   loadTasks().forEach((task) => appendTask(task));
+  countUnDoneTasks();
   loadingDiv.classList.add('d-none');
   if (!sleepDiv.classList.contains('d-none')) return;
   rootDiv.classList.remove('d-none');
