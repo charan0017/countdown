@@ -45,6 +45,7 @@ function taskChildOnClick(evt, taskId) {
     case `task-${taskId}`:
     default:
       taskChild.classList[taskChild.classList.contains('text-strike') ? 'remove' : 'add']('text-strike');
+      task.setDone(!task.isDone());
       break;
   }
   saveTasks(tasks);

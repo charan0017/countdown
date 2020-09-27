@@ -80,9 +80,15 @@ function createTaskChild(task, taskChildOnClick) {
   taskChild.setAttribute('id', `task-${taskId}`);
   taskChild.setAttribute(
     'class',
-    'mb-2 rounded list-group-item list-group-item-action pointer fade-in text-dark bg-w-lite'
+    `mb-2 rounded list-group-item list-group-item-action pointer fade-in text-dark ${
+      task.isDone() ? 'text-strike' : ''
+    } bg-w-lite`
   );
-  taskChild.innerHTML = `<span id="task-${taskId}-simp" class="float-left mr-3"><i id="task-${taskId}-imp" class="far fa-star"></i></span>${task.title}<span id="task-${taskId}-sdel" class="float-right"><i id="task-${taskId}-del" class="fas fa-times-circle"></span>`;
+  taskChild.innerHTML = `<span id="task-${taskId}-simp" class="float-left mr-3"><i id="task-${taskId}-imp" class="${
+    task.isImportant() ? 'fas' : 'far'
+  } fa-star"></i></span>${
+    task.title
+  }<span id="task-${taskId}-sdel" class="float-right"><i id="task-${taskId}-del" class="fas fa-times-circle"></span>`;
   taskChild.addEventListener('click', (evt) => taskChildOnClick(evt, taskId));
   taskChild.onanimationend = () => {
     taskChild.classList.remove('fade-in');
