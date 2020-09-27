@@ -26,15 +26,25 @@
       <div class="row h-100 text-center">
         <div id="countdown" class="col-3 bg-drk">
           <div class="d-flex flex-column h-100 justify-content-center">
-            <!-- <div class="row d-flex justify-content-center">
-              <div class="card">
-                <h4 class="ml-auto mr-4 mt-3 mb-0">Toronto</h4>
-                <p class="ml-auto mr-4 mb-0 med-font">Snow</p>
-                <h3 class="ml-auto mr-4 large-font">-20&#176;</h3>
-                <p class="time-font mb-0 ml-4 mt-auto">08:30 <span class="sm-font">AM</span></p>
-                <p class="ml-4 mb-4">Wednesday, 18 October 2019</p>
+            <div class="row align-self-center rounded w-75 bg-lite text-white p-1">
+              <div id="weather-info" class="col w-100">
+                <div class="row m-0 w-100">
+                  <img
+                    id="weather-icon"
+                    class="weather-img ml-auto"
+                    src="https://www.accuweather.com/images/weathericons/38.svg"
+                    alt="🌞"
+                  />
+                  <h3 id="weather-temp" class="large-font ml-1 mt-3">-20&#176; C</h3>
+                </div>
+                <div class="row m-0 w-100">
+                  <p id="weather-text" class="med-font ml-auto">Snow</p>
+                </div>
+                <div class="row m-0 w-100">
+                  <p id="date-text" class="mr-auto">Wed, 18 Oct 2019</p>
+                </div>
               </div>
-            </div> -->
+            </div>
             <div class="row justify-content-center align-items-center">
               <h1 id="remaining-percent" class="position-absolute text-white">100 %</h1>
               <svg class="svg">
@@ -123,7 +133,7 @@
         </div>
       </div>
     </div>
-    <div id="sleep" class="h-100 d-none">
+    <div id="sleep" class="h-100 d-none bg-img">
       <div class="row justify-content-center align-items-center h-100">
         <div class="text-center">
           <h2>Its sleeptime 😴</h2>
@@ -137,9 +147,10 @@
     <script src="lib/js/bootstrap@4.5.2.min.js"></script>
     <script src="src/timer.js"></script>
     <script src="src/task.js"></script>
+    <script src="src/utils.js"></script>
+    <script src="src/weather.js"></script>
     <script src="src/notify.js"></script>
     <script src="src/speak.js"></script>
-    <script src="src/utils.js"></script>
     <script src="src/index.js"></script>
     <script src="src/start-timer.js"></script>
   </body>

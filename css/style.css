@@ -92,6 +92,10 @@ body {
   }
 }
 
+.weather-img {
+  height: 3em;
+}
+
 .bg-img {
   background-repeat: no-repeat;
   background-size: cover;
