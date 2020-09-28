@@ -18,7 +18,7 @@ function getTodaysDateTxtStr() {
 
 async function fetchWeather() {
   const savedWeather = fetchItem('weatherData');
-  if (savedWeather && savedWeather === getTodaysDateStr()) savedWeather;
+  if (savedWeather && savedWeather.date === getTodaysDateTxtStr()) return savedWeather;
   const response = await fetch(weatherAPI);
   const responseData = await response.json();
   const [todaysForecast] = responseData;
