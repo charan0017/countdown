@@ -6,7 +6,8 @@ const tasks = [];
 let unDoneTasksCount = 0;
 
 function countUnDoneTasks() {
-  unDoneTasksCount = tasks.filter((t) => t.done === false).length;
+  unDoneTasksCount = tasks.filter((t) => !t.isDone()).length;
+  console.log(unDoneTasksCount);
 }
 
 function taskChildOnClick(evt, taskId) {
@@ -57,7 +58,6 @@ function addTaskFunc() {
   const task = new Task(taskTitle.trim(), '');
   addTaskInput.value = '';
   appendTask(task);
-  unDoneTasksCount += 1;
   addTaskInput.select();
 }
 
