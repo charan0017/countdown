@@ -33,6 +33,10 @@ body {
   color: #f3f3f3;
 }
 
+.w-80 {
+  width: 80 !important;
+}
+
 .text-strike,
 .text-strike:hover {
   text-decoration: line-through;

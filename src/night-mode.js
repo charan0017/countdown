@@ -17,7 +17,6 @@ nightModeCheckbox.addEventListener('change', function () {
 
 async function nightMode(enabled = false) {
   updateClassList(rootDiv, enabled, 'nightmode-background');
-  console.log(enabled);
   if (enabled) {
     rootDiv.style.backgroundImage = null;
   } else {
