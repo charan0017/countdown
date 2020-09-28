@@ -7,7 +7,6 @@ let unDoneTasksCount = 0;
 
 function countUnDoneTasks() {
   unDoneTasksCount = tasks.filter((t) => !t.isDone()).length;
-  console.log(unDoneTasksCount);
 }
 
 function taskChildOnClick(evt, taskId) {
