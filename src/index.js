@@ -1,20 +1,6 @@
-const rootDiv = document.querySelector('#root');
-const loadingDiv = document.querySelector('#loading');
-const sleepDiv = document.querySelector('#sleep');
-const countdownDiv = rootDiv.querySelector('#countdown');
-const countdownAllEls = countdownDiv.querySelectorAll('div.d-flex:not(#sleep)');
-const remainingPercentP = countdownDiv.querySelector('#remaining-percent');
-const remainingDurationDiv = countdownDiv.querySelector('#remaining-duration');
-const remainingHrsP = remainingDurationDiv.querySelector('#hrs');
-const remainingMinsP = remainingDurationDiv.querySelector('#mins');
-const remainingSecsP = remainingDurationDiv.querySelector('#secs');
-const circle = countdownDiv.querySelector('#circle');
 const taskList = document.querySelector('#task-list');
 const addTaskInput = document.querySelector('#add-task-input');
 const addTaskBtn = document.querySelector('#add-task');
-
-const perimeter = circle.getAttribute('r') * Math.PI * 2;
-circle.setAttribute('stroke-dasharray', perimeter);
 
 const tasks = [];
 let unDoneTasksCount = 0;

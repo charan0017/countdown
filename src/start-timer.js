@@ -1,3 +1,17 @@
+const rootDiv = document.querySelector('#root');
+const loadingDiv = document.querySelector('#loading');
+const sleepDiv = document.querySelector('#sleep');
+const countdownDiv = rootDiv.querySelector('#countdown');
+const remainingPercentP = countdownDiv.querySelector('#remaining-percent');
+const remainingDurationDiv = countdownDiv.querySelector('#remaining-duration');
+const remainingHrsP = remainingDurationDiv.querySelector('#hrs');
+const remainingMinsP = remainingDurationDiv.querySelector('#mins');
+const remainingSecsP = remainingDurationDiv.querySelector('#secs');
+const circle = countdownDiv.querySelector('#circle');
+
+const perimeter = circle.getAttribute('r') * Math.PI * 2;
+circle.setAttribute('stroke-dasharray', perimeter);
+
 let timer;
 
 function createNewTimer() {
