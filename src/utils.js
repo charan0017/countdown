@@ -75,7 +75,7 @@ async function getBingWallpaperUrl() {
   const data = await res.text();
   const bingImgUrl = parseImageUrl(data);
   storeItem('bingImgUrl', { url: bingImgUrl });
-  return;
+  return bingImgUrl;
 }
 
 function createTaskChild(task, taskChildOnClick) {

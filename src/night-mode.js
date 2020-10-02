@@ -35,10 +35,10 @@ async function nightMode(enabled = false) {
   updateClassList(sleepDiv, enabled, 'nightmode-text');
 }
 
-function checkNighModeEnabled() {
+async function checkNighModeEnabled() {
   const nightModeEnabled = localStorage.getItem(NightModeEnabled) === 'true';
-  nightMode(!!nightModeEnabled);
   nightModeCheckbox.checked = !!nightModeEnabled;
+  await nightMode(!!nightModeEnabled);
 }
 
 checkNighModeEnabled();
