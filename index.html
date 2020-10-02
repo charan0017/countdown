@@ -28,27 +28,40 @@
       <div class="row h-100 text-center">
         <div id="countdown" class="col-3 bg-drk">
           <div class="d-flex flex-column h-100 justify-content-center">
-            <div class="row align-self-center w-80 text-white p-1">
-              <div id="weather-info" class="col bg-lite rounded w-100">
-                <div class="row m-0 w-100">
-                  <img
-                    id="weather-icon"
-                    class="weather-img mt-2 ml-auto"
-                    src="https://www.accuweather.com/images/weathericons/38.svg"
-                    alt="🌞"
-                  />
-                  <h3 id="weather-temp" class="large-font ml-1 mt-3">-20&#176; C</h3>
+            <div class="row align-self-center w-90 h-30 text-white p-1">
+              <div id="carousel" class="bg-lite rounded h-100 w-100">
+                <div
+                  id="weather-info"
+                  class="d-flex flex-column slides fade-in-left justify-content-center p-3 w-100 h-100"
+                >
+                  <div class="row m-0">
+                    <img
+                      id="weather-icon"
+                      class="weather-img mt-2 ml-auto"
+                      src="https://www.accuweather.com/images/weathericons/38.svg"
+                      alt="🌞"
+                    />
+                    <h3 id="weather-temp" class="large-font ml-1 mt-3">-20&#176; C</h3>
+                  </div>
+                  <div class="row m-0">
+                    <p id="weather-text" class="med-font ml-auto">Snow</p>
+                  </div>
+                  <div class="row m-0">
+                    <p id="date-text" class="text-left">Wed, 18 Oct 2019</p>
+                  </div>
                 </div>
-                <div class="row m-0 w-100">
-                  <p id="weather-text" class="med-font ml-auto">Snow</p>
-                </div>
-                <div class="row m-0 w-100">
-                  <p id="date-text" class="text-left">Wed, 18 Oct 2019</p>
+                <div class="d-flex flex-column slides fade-in-left justify-content-center p-3 w-100 h-100">
+                  <div class="row m-0 w-100">
+                    <p id="quote" class="lead m-0">"To believe in something, and not to live it, is dishonest."</p>
+                  </div>
+                  <div class="row m-0 w-100 text-right">
+                    <p id="quote-by" class="w-100 m-0 text-capitalize"><small>— Mahatma Gandhi</small></p>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="row justify-content-center align-items-center">
-              <h1 id="remaining-percent" class="position-absolute text-white">100 %</h1>
+              <h1 id="remaining-percent" class="position-absolute text-white select-none">100 %</h1>
               <svg class="svg">
                 <filter id="dropshadow" height="1000%">
                   <feGaussianBlur in="SourceAlpha" stdDeviation="20" />
@@ -90,16 +103,13 @@
               <div class="row justify-content-around align-items-center text-white">
                 <div id="remaining-duration" class="row w-75 text-uppercase pt-3 pb-3 bg-drk shadow-lg rounded">
                   <div class="col-4 border-right">
-                    <h3 id="hrs" class="m-0">&nbsp;</h3>
-                    <!-- <h6 class="m-0">hours</h6> -->
+                    <h3 id="hrs" class="m-0 select-none">&nbsp;</h3>
                   </div>
                   <div class="col-4 border-right">
-                    <h3 id="mins" class="m-0">&nbsp;</h3>
-                    <!-- <h6 class="m-0">minutes</h6> -->
+                    <h3 id="mins" class="m-0 select-none">&nbsp;</h3>
                   </div>
                   <div class="col-4">
-                    <h3 id="secs" class="m-0">&nbsp;</h3>
-                    <!-- <h6 class="m-0">seconds</h6> -->
+                    <h3 id="secs" class="m-0 select-none">&nbsp;</h3>
                   </div>
                 </div>
               </div>
@@ -150,7 +160,7 @@
     <script src="src/timer.js"></script>
     <script src="src/task.js"></script>
     <script src="src/utils.js"></script>
-    <script src="src/weather.js"></script>
+    <script src="src/carousel.js"></script>
     <script src="src/notify.js"></script>
     <script src="src/speak.js"></script>
     <script src="src/start-timer.js"></script>

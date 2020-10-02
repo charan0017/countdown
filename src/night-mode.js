@@ -24,8 +24,8 @@ async function nightMode(enabled = false) {
     rootDiv.style.backgroundImage = `url('${imageUrl}')`;
     sleepDiv.style.backgroundImage = `url('${imageUrl}')`;
   }
-  updateClassList(weatherInfoDiv, !enabled, 'bg-lite');
-  updateClassList(weatherInfoDiv, enabled, 'bg-w-drk');
+  updateClassList(carouselDiv, !enabled, 'bg-lite');
+  updateClassList(carouselDiv, enabled, 'bg-w-drk');
   updateClassList(remainingDurationDiv, !enabled, 'bg-drk');
   updateClassList(remainingDurationDiv, enabled, 'bg-w-drk');
   updateClassList(nightModeDiv, !enabled, 'bg-drk');

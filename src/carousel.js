@@ -1,8 +1,24 @@
-const weatherInfoDiv = document.querySelector('#weather-info');
+const carouselDiv = document.querySelector('#carousel');
+const weatherInfoDiv = carouselDiv.querySelector('#weather-info');
 const weatherIconImg = weatherInfoDiv.querySelector('#weather-icon');
 const weatherTemp = weatherInfoDiv.querySelector('#weather-temp');
 const weatherText = weatherInfoDiv.querySelector('#weather-text');
 const dateText = weatherInfoDiv.querySelector('#date-text');
+const slidesEls = carouselDiv.querySelectorAll('.slides');
+
+let slideIndex = 0;
+function carousel() {
+  slidesEls.forEach((el) => {
+    if (el.classList.contains('slides')) return;
+    el.classList.add('slides');
+  });
+  slideIndex++;
+  if (slideIndex > slidesEls.length) {
+    slideIndex = 1;
+  }
+  slidesEls[slideIndex - 1].classList.remove('slides');
+  setTimeout(carousel, 4000);
+}
 
 const weatherAPI =
   'https://dataservice.accuweather.com/currentconditions/v1/202190?apikey=yWUtuxJWjXxO7dL9cSTc0PTLoXDdYGYF';
@@ -33,6 +49,7 @@ async function fetchWeather() {
 }
 
 (async () => {
+  carousel();
   const weather = await fetchWeather();
   dateText.textContent = weather.date;
   weatherTemp.textContent = weather.temp;
