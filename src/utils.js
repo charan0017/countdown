@@ -31,15 +31,6 @@ function updateClassList(el, add, className) {
   el.classList[add ? 'add' : 'remove'](className);
 }
 
-function parseImageUrl(str) {
-  const urlsMatch = str.match(/href="(.*?)"/g);
-  if (!urlsMatch) return null;
-  let imageUrl = urlsMatch.find((url) => url.includes('1920x1080') && url.endsWith('.jpg"'));
-  if (!imageUrl) return null;
-  imageUrl = imageUrl.replace('href=', '').replace(/"/g, '');
-  return bingUrl + imageUrl;
-}
-
 function getTodaysDateStr() {
   return new Date().toISOString().split('T')[0];
 }
@@ -63,13 +54,24 @@ function fetchItem(name) {
 }
 
 const bingUrl = 'https://www.bing.com';
+const bingIndiaUrl = `${bingUrl}/?cc=in`;
 const corsProxy = 'https://api.codetabs.com/v1/proxy?quest=';
+
+function parseImageUrl(str) {
+  const urlsMatch = str.match(/href="(.*?)"/g);
+  if (!urlsMatch) return null;
+  let imageUrl = urlsMatch.find((url) => url.includes('1920x1080') && url.endsWith('.jpg"'));
+  if (!imageUrl) return null;
+  imageUrl = imageUrl.replace('href=', '').replace(/"/g, '');
+  return bingUrl + imageUrl;
+}
+
 async function getBingWallpaperUrl() {
   const bingImgData = fetchItem('bingImgUrl');
   if (bingImgData && bingImgData.date === getTodaysDateStr() && bingImgData.url) {
     return bingImgData.url;
   }
-  const res = await fetch(corsProxy + bingUrl, { mode: 'cors' });
+  const res = await fetch(corsProxy + bingIndiaUrl, { mode: 'cors' });
   const data = await res.text();
   const bingImgUrl = parseImageUrl(data);
   storeItem('bingImgUrl', { url: bingImgUrl });
