@@ -19,6 +19,7 @@ body {
   position: absolute;
   top: 1vh;
   right: 1.2vw;
+  padding-right: 0.35rem !important;
 }
 
 .nightmode-background {

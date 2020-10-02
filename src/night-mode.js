@@ -30,7 +30,6 @@ async function nightMode(enabled = false) {
   updateClassList(remainingDurationDiv, enabled, 'bg-w-drk');
   updateClassList(nightModeDiv, !enabled, 'bg-drk');
   updateClassList(nightModeDiv, enabled, 'bg-w-drk');
-  updateClassList(nightModeDiv, enabled, 'text-white');
   updateClassList(sleepDiv, enabled, 'nightmode-background');
   updateClassList(sleepDiv, enabled, 'nightmode-text');
 }
