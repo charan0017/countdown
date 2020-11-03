@@ -4,7 +4,14 @@ const weatherIconImg = weatherInfoDiv.querySelector('#weather-icon');
 const weatherTemp = weatherInfoDiv.querySelector('#weather-temp');
 const weatherText = weatherInfoDiv.querySelector('#weather-text');
 const dateText = weatherInfoDiv.querySelector('#date-text');
+const quoteBoxDiv = carouselDiv.querySelector('#quote-box');
+const quoteText = quoteBoxDiv.querySelector('#quote');
+const quoteByText = quoteBoxDiv.querySelector('#quote-by');
 const slidesEls = carouselDiv.querySelectorAll('.slides');
+
+const weatherAPI =
+  'https://dataservice.accuweather.com/currentconditions/v1/202190?apikey=yWUtuxJWjXxO7dL9cSTc0PTLoXDdYGYF';
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 let slideIndex = 0;
 function carousel() {
@@ -20,16 +27,38 @@ function carousel() {
   setTimeout(carousel, 4000);
 }
 
-const weatherAPI =
-  'https://dataservice.accuweather.com/currentconditions/v1/202190?apikey=yWUtuxJWjXxO7dL9cSTc0PTLoXDdYGYF';
+(async () => {
+  carousel();
+  loadWeather();
+  loadQuote();
+})();
 
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-function getTodaysDateTxtStr() {
-  const date = new Date();
-  const dateNum = date.getDate();
-  const month = date.toLocaleString('default', { month: 'long' });
-  const year = date.getFullYear();
-  return `${days[date.getDay()]}, ${dateNum} ${month} ${year}`;
+async function loadQuote() {
+  const { quote, quoteBy } = await fetchQuote();
+  if (!quote || !quoteBy) return;
+  quoteText.innerText = `"${quote}"`;
+  quoteByText.innerText = `— ${quoteBy}`;
+}
+
+async function fetchQuote() {
+  const quoteOfTheDay = fetchItem('quoteOfTheDay');
+  if (quoteOfTheDay && quoteOfTheDay.date === getTodaysDateStr()) return quoteOfTheDay;
+  const response = await fetch(`${window.location.href}/assets/quotes.json`);
+  const quotes = await response.json();
+  const lastQuoteIndex = parseInt(localStorage.getItem('lastQuoteIndex') || '-1');
+  const nextQuoteIndex = lastQuoteIndex > quotes.length - 1 ? 0 : lastQuoteIndex + 1;
+  const nextQuote = quotes[nextQuoteIndex];
+  localStorage.setItem('lastQuoteIndex', nextQuoteIndex);
+  storeItem('quoteOfTheDay', nextQuote);
+  return nextQuote;
+}
+
+async function loadWeather() {
+  const weather = await fetchWeather();
+  dateText.textContent = weather.date;
+  weatherTemp.textContent = weather.temp;
+  weatherText.textContent = weather.text;
+  weatherIconImg.src = weather.icon;
 }
 
 async function fetchWeather() {
@@ -48,11 +77,10 @@ async function fetchWeather() {
   return weather;
 }
 
-(async () => {
-  carousel();
-  const weather = await fetchWeather();
-  dateText.textContent = weather.date;
-  weatherTemp.textContent = weather.temp;
-  weatherText.textContent = weather.text;
-  weatherIconImg.src = weather.icon;
-})();
+function getTodaysDateTxtStr() {
+  const date = new Date();
+  const dateNum = date.getDate();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const year = date.getFullYear();
+  return `${days[date.getDay()]}, ${dateNum} ${month} ${year}`;
+}
