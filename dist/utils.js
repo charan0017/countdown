@@ -120,9 +120,9 @@ var corsProxy = 'https://api.codetabs.com/v1/proxy?quest=';
 function parseImageUrl(str) {
   var urlsMatch = str.match(/href="(.*?)"/g);
   if (!urlsMatch) return null;
-  var imageUrl = urlsMatch.find(function (url) {
+  var imageUrl = urlsMatch.filter(function (url) {
     return url.includes('1920x1080') && url.endsWith('.jpg"');
-  });
+  })[0];
   if (!imageUrl) return null;
   imageUrl = imageUrl.replace('href=', '').replace(/"/g, '');
   return bingUrl + imageUrl;
