@@ -1,3 +1,7 @@
+function refreshWinForm() {
+  if (window.external && window.external.refresh) window.external.refresh();
+}
+
 const pad = (str) => `00${str}`.slice(-2);
 
 function getCurrentInterval() {

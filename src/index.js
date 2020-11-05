@@ -32,7 +32,7 @@ function taskChildOnClick(evt, taskId) {
       };
       taskChild.classList.add('fade-out');
       tasks.splice(taskIndex, 1);
-      if (window.external.refresh) window.external.refresh();
+      refreshWinForm();
       break;
     case `task-${taskId}`:
     default:
