@@ -121,7 +121,7 @@ function parseImageUrl(str) {
   var urlsMatch = str.match(/href="(.*?)"/g);
   if (!urlsMatch) return null;
   var imageUrl = urlsMatch.filter(function (url) {
-    return url.includes('1920x1080') && url.endsWith('.jpg"');
+    return url.indexOf('1920x1080') > -1 && url.endsWith('.jpg"');
   })[0];
   if (!imageUrl) return null;
   imageUrl = imageUrl.replace('href=', '').replace(/"/g, '');
