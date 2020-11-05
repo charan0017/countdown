@@ -1,0 +1,12 @@
+{
+    "presets": [
+        [
+        	"@babel/preset-env",
+        	{
+                "targets": "> 0.25%, not dead",
+                "exclude": ["transform-regenerator"]
+            }
+    	]
+    ],
+    "plugins": ["@babel/plugin-proposal-class-properties"]
+}
