@@ -47,6 +47,16 @@ var getBingWallpaperUrl = _async(function () {
   });
 });
 
+if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function (search, this_len) {
+    if (this_len === undefined || this_len > this.length) {
+      this_len = this.length;
+    }
+
+    return this.substring(this_len - search.length, this_len) === search;
+  };
+}
+
 var pad = function pad(str) {
   return "00".concat(str).slice(-2);
 };
