@@ -141,7 +141,7 @@ _async(function () {
 function getTodaysDateTxtStr() {
   var date = new Date();
   var dateNum = date.getDate();
-  var month = date.toLocaleString('default', {
+  var month = date.toLocaleString('en-GB', {
     month: 'long'
   });
   var year = date.getFullYear();

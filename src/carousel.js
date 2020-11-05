@@ -80,7 +80,7 @@ async function fetchWeather() {
 function getTodaysDateTxtStr() {
   const date = new Date();
   const dateNum = date.getDate();
-  const month = date.toLocaleString('default', { month: 'long' });
+  const month = date.toLocaleString('en-GB', { month: 'long' });
   const year = date.getFullYear();
   return `${days[date.getDay()]}, ${dateNum} ${month} ${year}`;
 }
