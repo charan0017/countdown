@@ -1,12 +1,3 @@
-if (!String.prototype.endsWith) {
-    String.prototype.endsWith = function(search, this_len) {
-        if (this_len === undefined || this_len > this.length) {
-            this_len = this.length;
-        }
-        return this.substring(this_len - search.length, this_len) === search;
-    };
-}
-
 const pad = (str) => `00${str}`.slice(-2);
 
 function getCurrentInterval() {
@@ -69,7 +60,7 @@ const corsProxy = 'https://api.codetabs.com/v1/proxy?quest=';
 function parseImageUrl(str) {
   const urlsMatch = str.match(/href="(.*?)"/g);
   if (!urlsMatch) return null;
-  let imageUrl = urlsMatch.filter((url) => url.indexOf('1920x1080') > -1 && url.endsWith('.jpg"'))[0];
+  let imageUrl = urlsMatch.find((url) => url.includes('1920x1080') && url.endsWith('.jpg"'));
   if (!imageUrl) return null;
   imageUrl = imageUrl.replace('href=', '').replace(/"/g, '');
   return bingUrl + imageUrl;
