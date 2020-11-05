@@ -7,7 +7,7 @@ const dateText = weatherInfoDiv.querySelector('#date-text');
 const quoteBoxDiv = carouselDiv.querySelector('#quote-box');
 const quoteText = quoteBoxDiv.querySelector('#quote');
 const quoteByText = quoteBoxDiv.querySelector('#quote-by');
-const slidesEls = carouselDiv.querySelectorAll('.slides');
+const slidesEls = Array.prototype.slice.call(carouselDiv.querySelectorAll('.slides'));
 
 const weatherAPI =
   'https://dataservice.accuweather.com/currentconditions/v1/202190?apikey=yWUtuxJWjXxO7dL9cSTc0PTLoXDdYGYF';

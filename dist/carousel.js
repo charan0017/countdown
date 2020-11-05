@@ -12,9 +12,96 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _async(f) {
+  return function () {
+    for (var args = [], i = 0; i < arguments.length; i++) {
+      args[i] = arguments[i];
+    }
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+    try {
+      return Promise.resolve(f.apply(this, args));
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+}
+
+function _call(body, then, direct) {
+  if (direct) {
+    return then ? then(body()) : body();
+  }
+
+  try {
+    var result = Promise.resolve(body());
+    return then ? result.then(then) : result;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+}
+
+var fetchWeather = _async(function () {
+  var savedWeather = fetchItem('weatherData');
+  return savedWeather && savedWeather.date === getTodaysDateTxtStr() ? savedWeather : _await(fetch(weatherAPI), function (response) {
+    return _await(response.json(), function (responseData) {
+      var _responseData = _slicedToArray(responseData, 1),
+          todaysForecast = _responseData[0];
+
+      var weather = {
+        date: getTodaysDateTxtStr(),
+        temp: "".concat(todaysForecast.Temperature.Metric.Value, " \xB0").concat(todaysForecast.Temperature.Metric.Unit),
+        text: todaysForecast.WeatherText,
+        icon: "https://www.accuweather.com/images/weathericons/".concat(todaysForecast.WeatherIcon, ".svg")
+      };
+      storeItem('weatherData', weather);
+      return weather;
+    });
+  });
+});
+
+function _await(value, then, direct) {
+  if (direct) {
+    return then ? then(value) : value;
+  }
+
+  if (!value || !value.then) {
+    value = Promise.resolve(value);
+  }
+
+  return then ? value.then(then) : value;
+}
+
+var loadWeather = function loadWeather() {
+  return _call(fetchWeather, function (weather) {
+    dateText.textContent = weather.date;
+    weatherTemp.textContent = weather.temp;
+    weatherText.textContent = weather.text;
+    weatherIconImg.src = weather.icon;
+  });
+};
+
+var fetchQuote = _async(function () {
+  var quoteOfTheDay = fetchItem('quoteOfTheDay');
+  return quoteOfTheDay && quoteOfTheDay.date === getTodaysDateStr() ? quoteOfTheDay : _await(fetch("".concat(window.location.href, "/assets/quotes.json")), function (response) {
+    return _await(response.json(), function (quotes) {
+      var lastQuoteIndex = parseInt(localStorage.getItem('lastQuoteIndex') || '-1');
+      var nextQuoteIndex = lastQuoteIndex > quotes.length - 1 ? 0 : lastQuoteIndex + 1;
+      var nextQuote = quotes[nextQuoteIndex];
+      localStorage.setItem('lastQuoteIndex', nextQuoteIndex);
+      storeItem('quoteOfTheDay', nextQuote);
+      return nextQuote;
+    });
+  });
+});
+
+var loadQuote = function loadQuote() {
+  return _call(fetchQuote, function (_ref) {
+    var quote = _ref.quote,
+        quoteBy = _ref.quoteBy;
+    if (!quote || !quoteBy) return;
+    quoteText.innerText = "\"".concat(quote, "\"");
+    quoteByText.innerText = "\u2014 ".concat(quoteBy);
+  });
+};
 
 var carouselDiv = document.querySelector('#carousel');
 var weatherInfoDiv = carouselDiv.querySelector('#weather-info');
@@ -25,7 +112,7 @@ var dateText = weatherInfoDiv.querySelector('#date-text');
 var quoteBoxDiv = carouselDiv.querySelector('#quote-box');
 var quoteText = quoteBoxDiv.querySelector('#quote');
 var quoteByText = quoteBoxDiv.querySelector('#quote-by');
-var slidesEls = carouselDiv.querySelectorAll('.slides');
+var slidesEls = Array.prototype.slice.call(carouselDiv.querySelectorAll('.slides'));
 var weatherAPI = 'https://dataservice.accuweather.com/currentconditions/v1/202190?apikey=yWUtuxJWjXxO7dL9cSTc0PTLoXDdYGYF';
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var slideIndex = 0;
@@ -45,89 +132,11 @@ function carousel() {
   setTimeout(carousel, 4000);
 }
 
-_asyncToGenerator(function* () {
+_async(function () {
   carousel();
   loadWeather();
   loadQuote();
 })();
-
-function loadQuote() {
-  return _loadQuote.apply(this, arguments);
-}
-
-function _loadQuote() {
-  _loadQuote = _asyncToGenerator(function* () {
-    var _yield$fetchQuote = yield fetchQuote(),
-        quote = _yield$fetchQuote.quote,
-        quoteBy = _yield$fetchQuote.quoteBy;
-
-    if (!quote || !quoteBy) return;
-    quoteText.innerText = "\"".concat(quote, "\"");
-    quoteByText.innerText = "\u2014 ".concat(quoteBy);
-  });
-  return _loadQuote.apply(this, arguments);
-}
-
-function fetchQuote() {
-  return _fetchQuote.apply(this, arguments);
-}
-
-function _fetchQuote() {
-  _fetchQuote = _asyncToGenerator(function* () {
-    var quoteOfTheDay = fetchItem('quoteOfTheDay');
-    if (quoteOfTheDay && quoteOfTheDay.date === getTodaysDateStr()) return quoteOfTheDay;
-    var response = yield fetch("".concat(window.location.href, "/assets/quotes.json"));
-    var quotes = yield response.json();
-    var lastQuoteIndex = parseInt(localStorage.getItem('lastQuoteIndex') || '-1');
-    var nextQuoteIndex = lastQuoteIndex > quotes.length - 1 ? 0 : lastQuoteIndex + 1;
-    var nextQuote = quotes[nextQuoteIndex];
-    localStorage.setItem('lastQuoteIndex', nextQuoteIndex);
-    storeItem('quoteOfTheDay', nextQuote);
-    return nextQuote;
-  });
-  return _fetchQuote.apply(this, arguments);
-}
-
-function loadWeather() {
-  return _loadWeather.apply(this, arguments);
-}
-
-function _loadWeather() {
-  _loadWeather = _asyncToGenerator(function* () {
-    var weather = yield fetchWeather();
-    dateText.textContent = weather.date;
-    weatherTemp.textContent = weather.temp;
-    weatherText.textContent = weather.text;
-    weatherIconImg.src = weather.icon;
-  });
-  return _loadWeather.apply(this, arguments);
-}
-
-function fetchWeather() {
-  return _fetchWeather.apply(this, arguments);
-}
-
-function _fetchWeather() {
-  _fetchWeather = _asyncToGenerator(function* () {
-    var savedWeather = fetchItem('weatherData');
-    if (savedWeather && savedWeather.date === getTodaysDateTxtStr()) return savedWeather;
-    var response = yield fetch(weatherAPI);
-    var responseData = yield response.json();
-
-    var _responseData = _slicedToArray(responseData, 1),
-        todaysForecast = _responseData[0];
-
-    var weather = {
-      date: getTodaysDateTxtStr(),
-      temp: "".concat(todaysForecast.Temperature.Metric.Value, " \xB0").concat(todaysForecast.Temperature.Metric.Unit),
-      text: todaysForecast.WeatherText,
-      icon: "https://www.accuweather.com/images/weathericons/".concat(todaysForecast.WeatherIcon, ".svg")
-    };
-    storeItem('weatherData', weather);
-    return weather;
-  });
-  return _fetchWeather.apply(this, arguments);
-}
 
 function getTodaysDateTxtStr() {
   var date = new Date();

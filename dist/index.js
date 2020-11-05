@@ -1,8 +1,18 @@
 "use strict";
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _async(f) {
+  return function () {
+    for (var args = [], i = 0; i < arguments.length; i++) {
+      args[i] = arguments[i];
+    }
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+    try {
+      return Promise.resolve(f.apply(this, args));
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+}
 
 var taskList = document.querySelector('#task-list');
 var addTaskInput = document.querySelector('#add-task-input');
@@ -80,7 +90,7 @@ addTaskInput.addEventListener('keyup', function (e) {
   addTaskFunc();
 });
 
-_asyncToGenerator(function* () {
+_async(function () {
   loadTasks().forEach(function (task, i) {
     setTimeout(function () {
       appendTask(task);

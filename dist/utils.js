@@ -1,14 +1,51 @@
 "use strict";
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _await(value, then, direct) {
+  if (direct) {
+    return then ? then(value) : value;
+  }
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+  if (!value || !value.then) {
+    value = Promise.resolve(value);
+  }
+
+  return then ? value.then(then) : value;
+}
+
+function _async(f) {
+  return function () {
+    for (var args = [], i = 0; i < arguments.length; i++) {
+      args[i] = arguments[i];
+    }
+
+    try {
+      return Promise.resolve(f.apply(this, args));
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+}
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var getBingWallpaperUrl = _async(function () {
+  var bingImgData = fetchItem('bingImgUrl');
+  return bingImgData && bingImgData.date === getTodaysDateStr() && bingImgData.url ? bingImgData.url : _await(fetch(corsProxy + bingIndiaUrl, {
+    mode: 'cors'
+  }), function (res) {
+    return _await(res.text(), function (data) {
+      var bingImgUrl = parseImageUrl(data);
+      storeItem('bingImgUrl', {
+        url: bingImgUrl
+      });
+      return bingImgUrl;
+    });
+  });
+});
 
 var pad = function pad(str) {
   return "00".concat(str).slice(-2);
@@ -89,31 +126,6 @@ function parseImageUrl(str) {
   if (!imageUrl) return null;
   imageUrl = imageUrl.replace('href=', '').replace(/"/g, '');
   return bingUrl + imageUrl;
-}
-
-function getBingWallpaperUrl() {
-  return _getBingWallpaperUrl.apply(this, arguments);
-}
-
-function _getBingWallpaperUrl() {
-  _getBingWallpaperUrl = _asyncToGenerator(function* () {
-    var bingImgData = fetchItem('bingImgUrl');
-
-    if (bingImgData && bingImgData.date === getTodaysDateStr() && bingImgData.url) {
-      return bingImgData.url;
-    }
-
-    var res = yield fetch(corsProxy + bingIndiaUrl, {
-      mode: 'cors'
-    });
-    var data = yield res.text();
-    var bingImgUrl = parseImageUrl(data);
-    storeItem('bingImgUrl', {
-      url: bingImgUrl
-    });
-    return bingImgUrl;
-  });
-  return _getBingWallpaperUrl.apply(this, arguments);
 }
 
 function createTaskChild(task, taskChildOnClick) {
