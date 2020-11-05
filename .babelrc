@@ -8,7 +8,8 @@
       			},
                 "exclude": ["transform-regenerator"]
             }
-    	]
+    	],
+        "minify"
     ],
     "plugins": [
     	"babel-plugin-transform-async-to-promises",
