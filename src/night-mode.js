@@ -13,6 +13,7 @@ nightModeCheckbox.addEventListener('change', function () {
     nightMode(false);
     localStorage.setItem(NightModeEnabled, false);
   }
+  refreshWinForm();
 });
 
 async function nightMode(enabled = false) {
@@ -32,7 +33,6 @@ async function nightMode(enabled = false) {
   updateClassList(nightModeDiv, enabled, 'bg-w-drk');
   updateClassList(sleepDiv, enabled, 'nightmode-background');
   updateClassList(sleepDiv, enabled, 'nightmode-text');
-  refreshWinForm();
 }
 
 async function checkNighModeEnabled() {
