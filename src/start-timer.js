@@ -33,8 +33,8 @@ function createNewTimer() {
     },
     onComplete() {
       console.log('complete');
-      // rootDiv.classList.add('d-none');
-      // sleepDiv.classList.remove('d-none');
+      rootDiv.classList.add('d-none');
+      sleepDiv.classList.remove('d-none');
       document.title = 'Sleeptime!! 💤';
     },
   });
