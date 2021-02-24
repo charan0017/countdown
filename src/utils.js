@@ -61,6 +61,12 @@ const bingUrl = 'https://www.bing.com';
 const bingIndiaUrl = `${bingUrl}/?cc=in`;
 // const corsProxy = 'https://api.codetabs.com/v1/proxy?quest=';
 const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+const corsProxyHeaders = {
+	'Sec-Fetch-Dest': 'empty',
+	'Sec-Fetch-Mode': 'cors',
+	'Sec-Fetch-Site': 'cors-site',
+	'Origin': 'null',
+};
 
 function parseImageUrl(str) {
   const urlsMatch = str.match(/href="(.*?)"/g);
@@ -76,7 +82,8 @@ async function getBingWallpaperUrl() {
   if (bingImgData && bingImgData.date === getTodaysDateStr() && bingImgData.url) {
     return bingImgData.url;
   }
-  const res = await fetch(corsProxy + bingIndiaUrl, { mode: 'cors' });
+
+  const res = await fetch(corsProxy + bingIndiaUrl, corsProxyHeaders);
   const data = await res.text();
   const bingImgUrl = parseImageUrl(data);
   storeItem('bingImgUrl', { url: bingImgUrl });
