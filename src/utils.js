@@ -59,7 +59,8 @@ function fetchItem(name) {
 
 const bingUrl = 'https://www.bing.com';
 const bingIndiaUrl = `${bingUrl}/?cc=in`;
-const corsProxy = 'https://api.codetabs.com/v1/proxy?quest=';
+// const corsProxy = 'https://api.codetabs.com/v1/proxy?quest=';
+const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
 function parseImageUrl(str) {
   const urlsMatch = str.match(/href="(.*?)"/g);
