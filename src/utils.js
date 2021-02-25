@@ -59,14 +59,15 @@ function fetchItem(name) {
 
 const bingUrl = 'https://www.bing.com';
 const bingIndiaUrl = `${bingUrl}/?cc=in`;
-// const corsProxy = 'https://api.codetabs.com/v1/proxy?quest=';
-const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-const corsProxyHeaders = {
-	'Sec-Fetch-Dest': 'empty',
-	'Sec-Fetch-Mode': 'cors',
-	'Sec-Fetch-Site': 'cors-site',
-	'Origin': 'null',
-};
+const corsProxy = 'https://api.codetabs.com/v1/proxy?quest=';
+const corsProxyHeaders = { mode: 'cors' };
+// const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+// const corsProxyHeaders = {
+// 	'Sec-Fetch-Dest': 'empty',
+// 	'Sec-Fetch-Mode': 'cors',
+// 	'Sec-Fetch-Site': 'cors-site',
+// 	'Origin': 'null',
+// };
 
 function parseImageUrl(str) {
   const urlsMatch = str.match(/href="(.*?)"/g);
