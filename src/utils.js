@@ -72,7 +72,7 @@ const corsProxyHeaders = { mode: 'cors' };
 function parseImageUrl(str) {
   const urlsMatch = str.match(/href="(.*?)"/g);
   if (!urlsMatch) return null;
-  let imageUrl = urlsMatch.find((url) => url.includes('1920x1080') && url.endsWith('.jpg"'));
+  let imageUrl = urlsMatch.find((url) => url.includes('1920x1080') && url.includes('.jpg"'));
   if (!imageUrl) return null;
   imageUrl = imageUrl.replace('href=', '').replace(/"/g, '');
   return bingUrl + imageUrl;
